@@ -38,7 +38,7 @@ public class SplashActivity extends FragmentActivity implements Runnable {
     @Override
     protected void onResume() {
         super.onResume();
-        m_handler.postDelayed(this, 3000);
+        m_handler.postDelayed(this, 1500);
     }
 
     @Override
