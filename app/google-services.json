@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "122809504308",
+    "firebase_url": "https://tatvaevents-a5f2a.firebaseio.com",
+    "project_id": "tatvaevents-a5f2a",
+    "storage_bucket": "tatvaevents-a5f2a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:122809504308:android:00317d92d0e2b55b",
+        "android_client_info": {
+          "package_name": "com.trekking.tatvaevents"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "122809504308-e70jfhecshmp0528oldv5l5k523qtet6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCiOvf0FP6U1GMGCslh452zMMkvGhBJWsg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "122809504308-e70jfhecshmp0528oldv5l5k523qtet6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
