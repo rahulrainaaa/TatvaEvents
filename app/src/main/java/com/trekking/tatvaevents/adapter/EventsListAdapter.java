@@ -7,9 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.trekking.tatvaevents.R;
+import com.trekking.tatvaevents.eventhandler.listener.EventListViewItemListener;
 import com.trekking.tatvaevents.model.Event;
 
 import java.util.ArrayList;
@@ -29,6 +29,7 @@ public class EventsListAdapter extends ArrayAdapter<Event> {
     private int layoutResource;
     private TextView m_txtEventTitle = null;
     private TextView m_txtEventDate = null;
+    private EventListViewItemListener m_Listener = null;
 
     /**
      * Global constants.
@@ -47,12 +48,13 @@ public class EventsListAdapter extends ArrayAdapter<Event> {
     /**
      * EventsListAdapter: Constructor.
      */
-    public EventsListAdapter(Activity activity, int layoutResource, ArrayList<Event> eventArrayList) {
+    public EventsListAdapter(Activity activity, EventListViewItemListener listener, int layoutResource, ArrayList<Event> eventArrayList) {
         super(activity, layoutResource, eventArrayList);
         this.activity = activity;
         this.layoutInflater = activity.getLayoutInflater();
         this.eventArrayList = eventArrayList;
         this.layoutResource = layoutResource;
+        this.m_Listener = listener;
     }
 
     /**
@@ -62,7 +64,7 @@ public class EventsListAdapter extends ArrayAdapter<Event> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        ViewHolder viewHolder = null;
+        ViewHolder viewHolder;
         View view = convertView;
         if (view == null) {
             viewHolder = new ViewHolder();
@@ -75,10 +77,28 @@ public class EventsListAdapter extends ArrayAdapter<Event> {
         }
         m_txtEventTitle = viewHolder.txtEventTitle;
         m_txtEventDate = viewHolder.txtEventDate;
+
         Event event = eventArrayList.get(position);
         m_txtEventTitle.setText(event.getTitle());
         m_txtEventDate.setText(event.getDateTime());
-        view.setOnClickListener(null);
+
+        view.setTag(R.string.event_item_view_tag, position);
+        view.setOnClickListener(m_Listener);
+
         return view;
+    }
+
+    /**
+     * @method destroy
+     * @desc Method to destroy data and clear space.
+     */
+    public void destroy() {
+
+        m_txtEventTitle = null;
+        m_txtEventDate = null;
+        m_Listener = null;
+        activity = null;
+        eventArrayList = null;
+        layoutInflater = null;
     }
 }

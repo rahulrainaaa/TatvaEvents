@@ -16,6 +16,8 @@ import android.widget.Toast;
 
 import com.trekking.tatvaevents.R;
 import com.trekking.tatvaevents.adapter.EventsListAdapter;
+import com.trekking.tatvaevents.eventhandler.callbackhandler.EventItemCallback;
+import com.trekking.tatvaevents.eventhandler.listener.EventListViewItemListener;
 import com.trekking.tatvaevents.model.Event;
 
 import java.util.ArrayList;
@@ -24,7 +26,7 @@ import java.util.ArrayList;
  * @class EventsActivity
  * @desc {@link AppCompatActivity} class to handle event activity.
  */
-public class EventsActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
+public class EventsActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener, EventItemCallback {
 
     /**
      * Global data members.
@@ -34,6 +36,7 @@ public class EventsActivity extends AppCompatActivity implements View.OnClickLis
     private ArrayList<Event> m_eventsArrayList = null;
     private EventsListAdapter m_eveEventsListAdapter = null;
     private DrawerLayout drawer = null;
+    private EventListViewItemListener m_ItemEventListener = null;
 
     /**
      * Global constants.
@@ -61,20 +64,14 @@ public class EventsActivity extends AppCompatActivity implements View.OnClickLis
             m_eventsArrayList.add(event);
         }
 
-//        ArrayList<String> list = new ArrayList<>();
-//        for (int i = 0; i < 40; i++) {
-//            list.add("item " + i);
-//        }
-//        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, list);
-//        m_eventListView.setAdapter(adapter);
-
-        m_eveEventsListAdapter = new EventsListAdapter(this, R.layout.item_event, m_eventsArrayList);
+        m_ItemEventListener = new EventListViewItemListener();
+        m_ItemEventListener.setCallback(this);
+        m_eveEventsListAdapter = new EventsListAdapter(this, m_ItemEventListener, R.layout.item_event, m_eventsArrayList);
         m_eventListView.setAdapter(m_eveEventsListAdapter);
         m_callFab.setOnClickListener(this);
 
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
     }
@@ -127,6 +124,16 @@ public class EventsActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     /**
+     * {@link EventItemCallback} callback method.
+     */
+    @Override
+    public void onEventItemClicked(View view, int tag) {
+
+        drawer.closeDrawers();
+        Toast.makeText(this, "event item: " + tag, Toast.LENGTH_SHORT).show();
+    }
+
+    /**
      * @method closeDrawer
      * @desc Method to close the Navigation Drawer.
      */
@@ -155,6 +162,4 @@ public class EventsActivity extends AppCompatActivity implements View.OnClickLis
     private void removeCallbacks() {
 
     }
-
-
 }
