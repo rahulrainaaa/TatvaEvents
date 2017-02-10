@@ -9,163 +9,163 @@ public class Event {
     /**
      * Private global data members.
      */
-    private int nSno = 0;                   // Event Sno.
-    private String sTitle = null;           // Event Title.
-    private String sDescription = null;     // Event Description.
-    private String sStartPlace = null;      // Starting Place (Depart from place/point of meeting).
-    private String sPlace = null;           // Place to be visited.
-    private String sPhone = null;           // Contact number for information.
-    private String sPrice = null;           // Price of event.
-    private String sMapPlot = null;         // Map position of place for event.
-    private String sBooking = null;         // Booking or Payment url to web.
-    private String sImage = null;           // Image URL.
-    private String sDateTime = null;        // Event Date, time start.
+    private int sno = 0;                   // Event Sno.
+    private String title = null;           // Event Title.
+    private String description = null;     // Event Description.
+    private String startplace = null;      // Starting Place (Depart from place/point of meeting).
+    private String place = null;           // Place to be visited.
+    private String phone = null;           // Contact number for information.
+    private String price = null;           // Price of event.
+    private String mapplot = null;         // Map position of place for event.
+    private String booking = null;         // Booking or Payment url to web.
+    private String imgurl = null;        // Image URL.
+    private String startdt = null;   // Event Date, time start.
 
     /**
      * Getter Setter for Sno.
      */
     public int getSno() {
-        return nSno;
+        return sno;
     }
 
     public void setSno(int nSno) {
-        this.nSno = nSno;
+        this.sno = nSno;
     }
 
     /**
      * Getter Setter for Title.
      */
     public String getTitle() {
-        if (this.sTitle == null) {
+        if (this.title == null) {
             return "";
         }
-        return sTitle;
+        return title;
     }
 
     public void setTitle(String sTitle) {
-        this.sTitle = sTitle;
+        this.title = sTitle;
     }
 
     /**
      * Getter Setter for Description.
      */
     public String getDescription() {
-        if (this.sDescription == null) {
+        if (this.description == null) {
             return "";
         }
-        return sDescription;
+        return description;
     }
 
     public void setDescription(String sDescription) {
-        this.sDescription = sDescription;
+        this.description = sDescription;
     }
 
     /**
      * Getter Setter for Start Place.
      */
     public String getStartPlace() {
-        if (this.sStartPlace == null) {
+        if (this.startplace == null) {
             return "";
         }
-        return sStartPlace;
+        return startplace;
     }
 
     public void setStartPlace(String sStartPlace) {
-        this.sStartPlace = sStartPlace;
+        this.startplace = sStartPlace;
     }
 
     /**
      * Getter Setter for Place.
      */
     public String getPlace() {
-        if (this.sPlace == null) {
+        if (this.place == null) {
             return "";
         }
-        return sPlace;
+        return place;
     }
 
     public void setPlace(String sPlace) {
-        this.sPlace = sPlace;
+        this.place = sPlace;
     }
 
     /**
      * Getter Setter for Phone.
      */
     public String getPhone() {
-        if (this.sPhone == null) {
+        if (this.phone == null) {
             return "";
         }
-        return sPhone;
+        return phone;
     }
 
     public void setPhone(String sPhone) {
-        this.sPhone = sPhone;
+        this.phone = sPhone;
     }
 
     /**
      * Getter Setter for Price.
      */
     public String getPrice() {
-        if (this.sPrice == null) {
+        if (this.price == null) {
             return "";
         }
-        return sPrice;
+        return price;
     }
 
     public void setPrice(String sPrice) {
-        this.sPrice = sPrice;
+        this.price = sPrice;
     }
 
     /**
      * Getter Setter for Map plot.
      */
     public String getMapPlot() {
-        if (this.sMapPlot == null) {
+        if (this.mapplot == null) {
             return "";
         }
-        return sMapPlot;
+        return mapplot;
     }
 
     public void setMapPlot(String sMapPlot) {
-        this.sMapPlot = sMapPlot;
+        this.mapplot = sMapPlot;
     }
 
     /**
      * Getter Setter for Booking url.
      */
     public String getBooking() {
-        if (this.sBooking == null) {
+        if (this.booking == null) {
             return "";
         }
-        return sBooking;
+        return booking;
     }
 
     public void setBooking(String sBooking) {
-        this.sBooking = sBooking;
+        this.booking = sBooking;
     }
 
     /**
      * Getter Setter for Image URL.
      */
     public String getImage() {
-        if (this.sImage == null) {
+        if (this.imgurl == null) {
             return "";
         }
-        return sImage;
+        return imgurl;
     }
 
     public void setImage(String sImage) {
-        this.sImage = sImage;
+        this.imgurl = sImage;
     }
 
     /**
      * Getter Setter for DateTime.
      */
     public String getDateTime() {
-        return sDateTime;
+        return startdt;
     }
 
     public void setDateTime(String sDateTime) {
-        this.sDateTime = sDateTime;
+        this.startdt = sDateTime;
     }
 }

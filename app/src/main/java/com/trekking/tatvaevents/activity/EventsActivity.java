@@ -21,6 +21,7 @@ import com.trekking.tatvaevents.adapter.EventsPageAdapter;
 import com.trekking.tatvaevents.eventhandler.callbackhandler.EventItemCallback;
 import com.trekking.tatvaevents.eventhandler.listener.EventListViewItemListener;
 import com.trekking.tatvaevents.model.Event;
+import com.trekking.tatvaevents.utils.Constants;
 
 import java.util.ArrayList;
 
@@ -36,7 +37,7 @@ public class EventsActivity extends AppCompatActivity implements View.OnClickLis
     private DrawerLayout drawer = null;
     private ListView m_eventListView = null;
     private ViewPager mEventViewPager = null;
-    private FloatingActionButton m_callFab = null;
+    private FloatingActionButton mBillingFab = null;
     private ArrayList<Event> m_eventsArrayList = null;
     private EventsListAdapter m_eveEventsListAdapter = null;
     private EventListViewItemListener m_ItemEventListener = null;
@@ -57,30 +58,31 @@ public class EventsActivity extends AppCompatActivity implements View.OnClickLis
         setSupportActionBar(toolbar);
 
         m_eventListView = (ListView) findViewById(R.id.events_list_view);
-        m_callFab = (FloatingActionButton) findViewById(R.id.calling_fab);
+        mBillingFab = (FloatingActionButton) findViewById(R.id.billing_fab);
         mEventViewPager = (ViewPager) findViewById(R.id.viewpager);
 
-        m_eventsArrayList = new ArrayList<>();
-        for (int nEventNo = 0; nEventNo < 30; nEventNo++) {
-            Event event = new Event();
-            event.setSno(nEventNo);
-            event.setTitle("Event Title " + nEventNo);
-            event.setDateTime("2017-03-25 08:00 PM");
-            event.setDescription("Description:: " + nEventNo);
-            event.setPlace("Place:: " + nEventNo);
-            event.setPhone("Phone:: " + nEventNo);
-            event.setPrice("Price:: " + nEventNo);
-            event.setMapPlot("MapPlot:: " + nEventNo);
-            event.setBooking("Booking:: " + nEventNo);
-            event.setImage("image:: " + nEventNo);
-            m_eventsArrayList.add(event);
-        }
+        m_eventsArrayList = Constants.eventArrayList;
+//        m_eventsArrayList = new ArrayList<>();
+//        for (int nEventNo = 0; nEventNo < 30; nEventNo++) {
+//            Event event = new Event();
+//            event.setSno(nEventNo);
+//            event.setTitle("Event Title " + nEventNo);
+//            event.setDateTime("2017-03-25 08:00 PM");
+//            event.setDescription("Description:: " + nEventNo);
+//            event.setPlace("Place:: " + nEventNo);
+//            event.setPhone("Phone:: " + nEventNo);
+//            event.setPrice("Price:: " + nEventNo);
+//            event.setMapPlot("MapPlot:: " + nEventNo);
+//            event.setBooking("Booking:: " + nEventNo);
+//            event.setImage("image:: " + nEventNo);
+//            m_eventsArrayList.add(event);
+//        }
 
         m_ItemEventListener = new EventListViewItemListener();
         m_ItemEventListener.setCallback(this);
         m_eveEventsListAdapter = new EventsListAdapter(this, m_ItemEventListener, R.layout.item_event, m_eventsArrayList);
         m_eventListView.setAdapter(m_eveEventsListAdapter);
-        m_callFab.setOnClickListener(this);
+        mBillingFab.setOnClickListener(this);
 
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -89,12 +91,14 @@ public class EventsActivity extends AppCompatActivity implements View.OnClickLis
 
         mEventViewPager.setAdapter(new EventsPageAdapter(this, this, m_eventsArrayList));
         mEventViewPager.setCurrentItem(0);
+        Constants.eventsActivity = this;
     }
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
+
         clearMemory();
+        super.onDestroy();
     }
 
     @Override
@@ -116,17 +120,25 @@ public class EventsActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     public void onClick(View clickedView) {
 
+        final int currentPosition = mEventViewPager.getCurrentItem();
         switch (clickedView.getId()) {
-            case R.id.calling_fab:
+            case R.id.billing_fab:
 
                 Snackbar.make(clickedView, "You want join this event ?", Snackbar.LENGTH_LONG).setAction("Yes", new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
 
-                        int currentPosition = mEventViewPager.getCurrentItem();
-                        Toast.makeText(EventsActivity.this, "Event URL:" + m_eventsArrayList.get(currentPosition).getBooking(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(EventsActivity.this, "Event Booking URL:" + m_eventsArrayList.get(currentPosition).getBooking(), Toast.LENGTH_SHORT).show();
                     }
                 }).show();
+                break;
+            case R.id.layout_calling:
+
+                Toast.makeText(this, "calling: " + m_eventsArrayList.get(currentPosition).getPhone(), Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.layout_map:
+
+                Toast.makeText(this, "Map: " + m_eventsArrayList.get(currentPosition).getMapPlot(), Toast.LENGTH_SHORT).show();
                 break;
             default:
 
@@ -157,6 +169,19 @@ public class EventsActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     /**
+     * @method refreshList
+     * @desc Method to refresh the data in list. (Callback from Application).
+     */
+    public void refreshList() {
+        mEventViewPager.setAdapter(new EventsPageAdapter(this, this, m_eventsArrayList));
+        mEventViewPager.setCurrentItem(0);
+        if (m_eveEventsListAdapter != null) {
+            m_eveEventsListAdapter.notifyDataSetChanged();
+        }
+        Toast.makeText(this, "Events Refreshed...", Toast.LENGTH_SHORT).show();
+    }
+
+    /**
      * @method closeDrawer
      * @desc Method to close the Navigation Drawer.
      */
@@ -174,7 +199,7 @@ public class EventsActivity extends AppCompatActivity implements View.OnClickLis
      */
     private void clearMemory() {
         removeCallbacks();
-        m_callFab = null;
+        mBillingFab = null;
         m_eventsArrayList = null;
     }
 
@@ -183,6 +208,6 @@ public class EventsActivity extends AppCompatActivity implements View.OnClickLis
      * @desc Method to remove callbacks.
      */
     private void removeCallbacks() {
-
+        Constants.eventsActivity = null;
     }
 }

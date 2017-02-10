@@ -38,6 +38,7 @@ public class EventPacker {
                 String title = eventJSONJsonObject.getString("title");
                 String description = eventJSONJsonObject.getString("description");
                 String place = eventJSONJsonObject.getString("place");
+                String startPlace = eventJSONJsonObject.getString("startplace");
                 String phone = eventJSONJsonObject.getString("phone");
                 String price = eventJSONJsonObject.getString("price");
                 String mapPlot = eventJSONJsonObject.getString("mapplot");
@@ -49,6 +50,7 @@ public class EventPacker {
                 event.setTitle(title.trim());
                 event.setDescription(description.trim());
                 event.setPlace(place.trim());
+                event.setStartPlace(startPlace.trim());
                 event.setPhone(phone.trim());
                 event.setPrice(price.trim());
                 event.setMapPlot(mapPlot.trim());

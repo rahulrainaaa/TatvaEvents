@@ -8,7 +8,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.trekking.tatvaevents.model.Event;
 import com.trekking.tatvaevents.utils.Constants;
+
+import java.util.Iterator;
 
 /**
  * @class TatvaEventsApplication
@@ -38,6 +41,8 @@ public class TatvaEventsApplication extends Application implements ValueEventLis
 
     @Override
     public void onTerminate() {
+
+        Constants.eventArrayList = null;
         super.onTerminate();
     }
 
@@ -58,8 +63,16 @@ public class TatvaEventsApplication extends Application implements ValueEventLis
     @Override
     public void onDataChange(DataSnapshot dataSnapshot) {
 
-        String value = dataSnapshot.getValue(String.class);
-        Log.d(TAG, "Value is: " + value);
+        Iterator<DataSnapshot> iterator = dataSnapshot.getChildren().iterator();
+        Constants.eventArrayList.clear();
+        while (iterator.hasNext()) {
+            Event event = iterator.next().getValue(Event.class);
+            Constants.eventArrayList.add(event);
+            Log.d(TAG, "Value is: " + event.getTitle());
+        }
+        if (Constants.eventsActivity != null) {
+            Constants.eventsActivity.refreshList();
+        }
     }
 
     @Override

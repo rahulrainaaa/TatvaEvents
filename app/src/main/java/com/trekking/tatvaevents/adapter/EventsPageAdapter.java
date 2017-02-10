@@ -5,6 +5,7 @@ import android.support.v4.view.PagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.trekking.tatvaevents.R;
@@ -34,12 +35,19 @@ public class EventsPageAdapter extends PagerAdapter {
         this.mEventArrayList = list;
         this.mActivity = activity;
         this.mInflater = LayoutInflater.from(activity);
+        this.mClickListener = clickListener;
     }
 
     @Override
     public Object instantiateItem(ViewGroup collection, int position) {
 
         ViewGroup layout = (ViewGroup) mInflater.inflate(R.layout.event_page_view, collection, false);
+
+        LinearLayout callLayout = (LinearLayout) layout.findViewById(R.id.layout_calling);
+        LinearLayout mapLayout = (LinearLayout) layout.findViewById(R.id.layout_map);
+
+        callLayout.setOnClickListener(mClickListener);
+        mapLayout.setOnClickListener(mClickListener);
 
         collection.addView(layout);
         return layout;
