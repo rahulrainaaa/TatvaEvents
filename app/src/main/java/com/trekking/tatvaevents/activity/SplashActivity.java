@@ -32,7 +32,6 @@ public class SplashActivity extends FragmentActivity implements Runnable {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         m_handler = new Handler();
-
     }
 
     @Override
