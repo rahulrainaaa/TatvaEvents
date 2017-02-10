@@ -54,12 +54,11 @@ public class EventsPageAdapter extends PagerAdapter {
         TextView txtStartFrom = (TextView) layout.findViewById(R.id.txt_start_from);
         TextView txtDescription = (TextView) layout.findViewById(R.id.txt_description);
 
-        //String imgUrl = mEventArrayList.get(position).getImage();
-        String imgUrl = "http://tattva-adventures.com/wp-content/uploads/2016/07/tattva-meditation-fitness.jpg";
+        String imgUrl = mEventArrayList.get(position).getImgurl();
         Picasso.with(mActivity).load(imgUrl).into(imgEvent);
         txtEventTitle.setText(mEventArrayList.get(position).getTitle());
         txtGoingTo.setText(mEventArrayList.get(position).getPlace());
-        txtStartOn.setText(mEventArrayList.get(position).getDateTime());
+        txtStartOn.setText(mEventArrayList.get(position).getStartdt());
         txtStartFrom.setText(mEventArrayList.get(position).getStartPlace());
         txtDescription.setText(mEventArrayList.get(position).getDescription());
 

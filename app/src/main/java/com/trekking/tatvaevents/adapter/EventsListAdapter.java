@@ -82,7 +82,7 @@ public class EventsListAdapter extends ArrayAdapter<Event> {
 
         Event event = eventArrayList.get(position);
         m_txtEventTitle.setText(event.getTitle());
-        m_txtEventDate.setText(event.getDateTime());
+        m_txtEventDate.setText(event.getStartdt());
 
         view.setTag(R.string.event_item_view_tag, position);
         view.setOnClickListener(m_Listener);

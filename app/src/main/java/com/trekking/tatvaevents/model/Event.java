@@ -148,25 +148,25 @@ public class Event {
     /**
      * Getter Setter for Image URL.
      */
-    public String getImage() {
+    public String getImgurl() {
         if (this.imgurl == null) {
             return "";
         }
         return imgurl;
     }
 
-    public void setImage(String imgurl) {
+    public void setImgurl(String imgurl) {
         this.imgurl = imgurl;
     }
 
     /**
-     * Getter Setter for DateTime.
+     * Getter Setter for Start Date Time.
      */
-    public String getDateTime() {
+    public String getStartdt() {
         return startdt;
     }
 
-    public void setDateTime(String startdt) {
+    public void setStartdt(String startdt) {
         this.startdt = startdt;
     }
 }
