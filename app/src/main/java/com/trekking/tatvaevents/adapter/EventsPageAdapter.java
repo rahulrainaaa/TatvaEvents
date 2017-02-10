@@ -5,9 +5,11 @@ import android.support.v4.view.PagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Toast;
+import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
 import com.trekking.tatvaevents.R;
 import com.trekking.tatvaevents.model.Event;
 
@@ -45,6 +47,21 @@ public class EventsPageAdapter extends PagerAdapter {
 
         LinearLayout callLayout = (LinearLayout) layout.findViewById(R.id.layout_calling);
         LinearLayout mapLayout = (LinearLayout) layout.findViewById(R.id.layout_map);
+        ImageView imgEvent = (ImageView) layout.findViewById(R.id.img_event);
+        TextView txtEventTitle = (TextView) layout.findViewById(R.id.txt_event_title);
+        TextView txtGoingTo = (TextView) layout.findViewById(R.id.txt_going_to);
+        TextView txtStartOn = (TextView) layout.findViewById(R.id.txt_start_on);
+        TextView txtStartFrom = (TextView) layout.findViewById(R.id.txt_start_from);
+        TextView txtDescription = (TextView) layout.findViewById(R.id.txt_description);
+
+        //String imgUrl = mEventArrayList.get(position).getImage();
+        String imgUrl = "http://tattva-adventures.com/wp-content/uploads/2016/07/tattva-meditation-fitness.jpg";
+        Picasso.with(mActivity).load(imgUrl).into(imgEvent);
+        txtEventTitle.setText(mEventArrayList.get(position).getTitle());
+        txtGoingTo.setText(mEventArrayList.get(position).getPlace());
+        txtStartOn.setText(mEventArrayList.get(position).getDateTime());
+        txtStartFrom.setText(mEventArrayList.get(position).getStartPlace());
+        txtDescription.setText(mEventArrayList.get(position).getDescription());
 
         callLayout.setOnClickListener(mClickListener);
         mapLayout.setOnClickListener(mClickListener);
@@ -57,7 +74,6 @@ public class EventsPageAdapter extends PagerAdapter {
     @Override
     public void destroyItem(ViewGroup container, int position, Object view) {
         container.removeView((View) view);
-        Toast.makeText(mActivity, "destroy:" + position, Toast.LENGTH_SHORT).show();
     }
 
     @Override

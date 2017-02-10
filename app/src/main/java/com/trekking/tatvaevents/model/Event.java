@@ -9,17 +9,18 @@ public class Event {
     /**
      * Private global data members.
      */
-    private int sno = 0;                   // Event Sno.
-    private String title = null;           // Event Title.
-    private String description = null;     // Event Description.
-    private String startplace = null;      // Starting Place (Depart from place/point of meeting).
-    private String place = null;           // Place to be visited.
-    private String phone = null;           // Contact number for information.
-    private String price = null;           // Price of event.
-    private String mapplot = null;         // Map position of place for event.
-    private String booking = null;         // Booking or Payment url to web.
-    private String imgurl = null;        // Image URL.
-    private String startdt = null;   // Event Date, time start.
+
+    private int sno = 0;                    // Event Sno.
+    private String title = null;            // Event Title.
+    private String description = null;      // Event Description.
+    private String startplace = null;       // Starting Place (Depart from place/point of meeting).
+    private String place = null;            // Place to be visited.
+    private String phone = null;            // Contact number for information.
+    private String price = null;            // Price of event.
+    private String mapplot = null;          // Map position of place for event.
+    private String booking = null;          // Booking or Payment url to web.
+    private String imgurl = null;           // Image URL.
+    private String startdt = null;          // Event Date, time start.
 
     /**
      * Getter Setter for Sno.
@@ -154,8 +155,8 @@ public class Event {
         return imgurl;
     }
 
-    public void setImage(String sImage) {
-        this.imgurl = sImage;
+    public void setImage(String imgurl) {
+        this.imgurl = imgurl;
     }
 
     /**
@@ -165,7 +166,7 @@ public class Event {
         return startdt;
     }
 
-    public void setDateTime(String sDateTime) {
-        this.startdt = sDateTime;
+    public void setDateTime(String startdt) {
+        this.startdt = startdt;
     }
 }

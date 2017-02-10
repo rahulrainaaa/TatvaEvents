@@ -9,6 +9,7 @@
         android:orientation="vertical">
 
         <ImageView
+            android:id="@+id/img_event"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -18,6 +19,7 @@
             android:src="@drawable/tattva_logo" />
 
         <TextView
+            android:id="@+id/txt_event_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -60,6 +62,7 @@
                     android:textSize="15sp" />
 
                 <TextView
+                    android:id="@+id/txt_going_to"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
@@ -82,6 +85,7 @@
                     android:textSize="15sp" />
 
                 <TextView
+                    android:id="@+id/txt_start_on"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
@@ -104,6 +108,7 @@
                     android:textSize="15sp" />
 
                 <TextView
+                    android:id="@+id/txt_start_from"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
@@ -186,6 +191,7 @@
             android:background="@color/colorFadeWhite" />
 
         <TextView
+            android:id="@+id/txt_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
