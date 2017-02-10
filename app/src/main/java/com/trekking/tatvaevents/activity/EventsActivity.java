@@ -1,8 +1,13 @@
 package com.trekking.tatvaevents.activity;
 
+import android.Manifest;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -62,22 +67,6 @@ public class EventsActivity extends AppCompatActivity implements View.OnClickLis
         mEventViewPager = (ViewPager) findViewById(R.id.viewpager);
 
         m_eventsArrayList = Constants.eventArrayList;
-//        m_eventsArrayList = new ArrayList<>();
-//        for (int nEventNo = 0; nEventNo < 30; nEventNo++) {
-//            Event event = new Event();
-//            event.setSno(nEventNo);
-//            event.setTitle("Event Title " + nEventNo);
-//            event.setDateTime("2017-03-25 08:00 PM");
-//            event.setDescription("Description:: " + nEventNo);
-//            event.setPlace("Place:: " + nEventNo);
-//            event.setPhone("Phone:: " + nEventNo);
-//            event.setPrice("Price:: " + nEventNo);
-//            event.setMapPlot("MapPlot:: " + nEventNo);
-//            event.setBooking("Booking:: " + nEventNo);
-//            event.setImage("image:: " + nEventNo);
-//            m_eventsArrayList.add(event);
-//        }
-
         m_ItemEventListener = new EventListViewItemListener();
         m_ItemEventListener.setCallback(this);
         m_eveEventsListAdapter = new EventsListAdapter(this, m_ItemEventListener, R.layout.item_event, m_eventsArrayList);
@@ -124,21 +113,52 @@ public class EventsActivity extends AppCompatActivity implements View.OnClickLis
         switch (clickedView.getId()) {
             case R.id.billing_fab:
 
-                Snackbar.make(clickedView, "You want join this event ?", Snackbar.LENGTH_LONG).setAction("Yes", new View.OnClickListener() {
+                if (m_eventsArrayList.size() == 0) {
+                    return;
+                }
+                Snackbar.make(clickedView, "You want join this event ?\nFee: " + m_eventsArrayList.get(currentPosition).getPrice(), Snackbar.LENGTH_LONG).setAction("Yes", new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
 
-                        Toast.makeText(EventsActivity.this, "Event Booking URL:" + m_eventsArrayList.get(currentPosition).getBooking(), Toast.LENGTH_SHORT).show();
+                        try {
+                            String url = "http://" + m_eventsArrayList.get(currentPosition).getBooking();
+                            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                            startActivity(intent);
+                        } catch (Exception exception) {
+                            exception.printStackTrace();
+                            Toast.makeText(EventsActivity.this, "Exception: Booking URL Error.", Toast.LENGTH_SHORT).show();
+                        }
+
                     }
                 }).show();
                 break;
             case R.id.layout_calling:
 
-                Toast.makeText(this, "calling: " + m_eventsArrayList.get(currentPosition).getPhone(), Toast.LENGTH_SHORT).show();
+                try {
+                    Intent callIntent = new Intent(Intent.ACTION_CALL);
+                    callIntent.setData(Uri.parse("tel:" + m_eventsArrayList.get(currentPosition).getPhone()));
+                    if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CALL_PHONE}, 1);
+                        return;
+                    }
+                    startActivity(callIntent);
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                    Toast.makeText(EventsActivity.this, "Exception: Contact Number Error.", Toast.LENGTH_SHORT).show();
+                }
+
                 break;
             case R.id.layout_map:
 
-                Toast.makeText(this, "Map: " + m_eventsArrayList.get(currentPosition).getMapPlot(), Toast.LENGTH_SHORT).show();
+                try {
+                    String geoUri = "http://maps.google.com/maps?q=loc:" + m_eventsArrayList.get(currentPosition).getMapPlot();
+                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(geoUri));
+                    startActivity(intent);
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                    Toast.makeText(EventsActivity.this, "Exception: Map URL Error.", Toast.LENGTH_SHORT).show();
+                }
+
                 break;
             default:
 

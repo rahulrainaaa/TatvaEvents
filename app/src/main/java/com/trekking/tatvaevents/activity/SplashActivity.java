@@ -5,6 +5,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.LinearLayout;
 
 import com.trekking.tatvaevents.R;
 
@@ -32,6 +35,9 @@ public class SplashActivity extends FragmentActivity implements Runnable {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         m_handler = new Handler();
+        Animation animation = AnimationUtils.loadAnimation(this, android.R.anim.slide_in_left);
+        LinearLayout layout = (LinearLayout) findViewById(R.id.activity_splash);
+        layout.startAnimation(animation);
     }
 
     @Override

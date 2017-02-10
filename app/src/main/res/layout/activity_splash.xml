@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
+    android:background="@drawable/box_outline"
     android:orientation="vertical"
     android:weightSum="2">
 
@@ -14,7 +15,7 @@
         android:layout_marginTop="20dp"
         android:layout_weight="1"
         android:gravity="center"
-        android:text="Tatva Adventures :)"
+        android:text="Tattva Adventures :)"
         android:textSize="40sp"
         android:textStyle="italic|normal"
         android:typeface="serif" />
@@ -31,11 +32,11 @@
             android:layout_width="50dp"
 
             android:layout_height="50dp"
-            android:visibility="visible"
-            tools:visibility="visible"
             android:indeterminate="false"
+            android:theme="@style/AppTheme"
+            android:visibility="visible"
             tools:elevation="24dp"
-            android:theme="@style/AppTheme" />
+            tools:visibility="visible" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -43,9 +44,11 @@
             android:gravity="center|bottom">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
+                android:paddingBottom="5dp"
+                android:gravity="center"
+                android:paddingTop="5dp"
                 android:text="www.tatva-adventures.com" />
 
         </LinearLayout>

@@ -49,15 +49,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingTop="@dimen/nav_header_vertical_spacing"
-                    android:text="Tatva Adventures"
+                    android:text="Tattva Adventures"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                    android:textSize="23dp" />
+                    android:textSize="24dp" />
 
                 <TextView
                     android:id="@+id/textView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="www.tattva-adventures.com" />
+                    android:text="www.tattva-adventures.com"
+                    android:textSize="15sp" />
 
             </LinearLayout>
 
