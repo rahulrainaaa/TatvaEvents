@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.trekking.tatvaevents.R;
 import com.trekking.tatvaevents.model.Event;
@@ -77,6 +78,7 @@ public class EventsListAdapter extends ArrayAdapter<Event> {
         Event event = eventArrayList.get(position);
         m_txtEventTitle.setText(event.getTitle());
         m_txtEventDate.setText(event.getDateTime());
+        view.setOnClickListener(null);
         return view;
     }
 }

@@ -65,9 +65,10 @@
                 android:id="@+id/events_list_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:divider="#5c5c5c"
                 android:layout_marginLeft="5dp"
-                android:dividerHeight="1dp" />
+                android:divider="#5c5c5c"
+                android:dividerHeight="1dp"
+                android:focusable="false" />
 
         </LinearLayout>
 

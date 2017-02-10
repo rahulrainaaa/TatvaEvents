@@ -60,15 +60,16 @@ public class EventsActivity extends AppCompatActivity implements View.OnClickLis
             event.setDateTime("2017-03-25 08:00 PM");
             m_eventsArrayList.add(event);
         }
+
+//        ArrayList<String> list = new ArrayList<>();
+//        for (int i = 0; i < 40; i++) {
+//            list.add("item " + i);
+//        }
+//        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, list);
+//        m_eventListView.setAdapter(adapter);
+
         m_eveEventsListAdapter = new EventsListAdapter(this, R.layout.item_event, m_eventsArrayList);
         m_eventListView.setAdapter(m_eveEventsListAdapter);
-
-        m_eventListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(EventsActivity.this, "nested", Toast.LENGTH_SHORT).show();
-            }
-        });
         m_callFab.setOnClickListener(this);
 
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -76,7 +77,6 @@ public class EventsActivity extends AppCompatActivity implements View.OnClickLis
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
-
     }
 
     @Override
@@ -88,12 +88,7 @@ public class EventsActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     public void onBackPressed() {
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
+        closeDrawer();
     }
 
     @Override
@@ -129,6 +124,18 @@ public class EventsActivity extends AppCompatActivity implements View.OnClickLis
 
         Toast.makeText(this, "on item click listener", Toast.LENGTH_SHORT).show();
         drawer.closeDrawer(GravityCompat.START);
+    }
+
+    /**
+     * @method closeDrawer
+     * @desc Method to close the Navigation Drawer.
+     */
+    private void closeDrawer() {
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
     }
 
     /**
