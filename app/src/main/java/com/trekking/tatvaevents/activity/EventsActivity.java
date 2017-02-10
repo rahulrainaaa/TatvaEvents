@@ -119,7 +119,14 @@ public class EventsActivity extends AppCompatActivity implements View.OnClickLis
         switch (clickedView.getId()) {
             case R.id.calling_fab:
 
-                Snackbar.make(clickedView, "Item clicked.", Snackbar.LENGTH_LONG).show();
+                Snackbar.make(clickedView, "You want join this event ?", Snackbar.LENGTH_LONG).setAction("Yes", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        int currentPosition = mEventViewPager.getCurrentItem();
+                        Toast.makeText(EventsActivity.this, "Event URL:" + m_eventsArrayList.get(currentPosition).getBooking(), Toast.LENGTH_SHORT).show();
+                    }
+                }).show();
                 break;
             default:
 

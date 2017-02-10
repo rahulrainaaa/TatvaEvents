@@ -40,7 +40,6 @@ public class EventsPageAdapter extends PagerAdapter {
 
         ViewGroup layout = (ViewGroup) mInflater.inflate(R.layout.event_page_view, collection, false);
 
-
         collection.addView(layout);
         return layout;
     }
