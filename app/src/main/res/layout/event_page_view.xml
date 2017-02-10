@@ -130,6 +130,7 @@
             android:weightSum="2">
 
             <LinearLayout
+                android:id="@+id/layout_calling"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -155,6 +156,7 @@
                 android:background="@color/colorFadeWhite" />
 
             <LinearLayout
+                android:id="@+id/layout_map"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

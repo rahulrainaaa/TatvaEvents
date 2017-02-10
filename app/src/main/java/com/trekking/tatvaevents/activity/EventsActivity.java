@@ -87,7 +87,7 @@ public class EventsActivity extends AppCompatActivity implements View.OnClickLis
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        mEventViewPager.setAdapter(new EventsPageAdapter(this, m_eventsArrayList));
+        mEventViewPager.setAdapter(new EventsPageAdapter(this, this, m_eventsArrayList));
         mEventViewPager.setCurrentItem(0);
     }
 

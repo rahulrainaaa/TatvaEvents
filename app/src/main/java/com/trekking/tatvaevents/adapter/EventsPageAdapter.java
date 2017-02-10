@@ -24,11 +24,12 @@ public class EventsPageAdapter extends PagerAdapter {
     private ArrayList<Event> mEventArrayList = null;
     private LayoutInflater mInflater = null;
     private Activity mActivity = null;
+    private View.OnClickListener mClickListener = null;
 
     /**
      * Constructor
      */
-    public EventsPageAdapter(Activity activity, ArrayList<Event> list) {
+    public EventsPageAdapter(Activity activity, View.OnClickListener clickListener, ArrayList<Event> list) {
 
         this.mEventArrayList = list;
         this.mActivity = activity;
