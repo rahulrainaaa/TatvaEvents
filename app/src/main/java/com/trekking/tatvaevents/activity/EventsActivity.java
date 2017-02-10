@@ -15,7 +15,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.AdapterView;
+import android.view.animation.AnimationUtils;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -33,7 +33,7 @@ import java.util.ArrayList;
  * @class EventsActivity
  * @desc {@link AppCompatActivity} class to handle event activity.
  */
-public class EventsActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener, EventItemCallback {
+public class EventsActivity extends AppCompatActivity implements View.OnClickListener, EventItemCallback {
 
     /**
      * Global data members.
@@ -79,7 +79,15 @@ public class EventsActivity extends AppCompatActivity implements View.OnClickLis
 
         mEventViewPager.setAdapter(new EventsPageAdapter(this, this, m_eventsArrayList));
         mEventViewPager.setCurrentItem(0);
+        mEventViewPager.startAnimation(AnimationUtils.loadAnimation(this, R.anim.page_enter));
         Constants.eventsActivity = this;
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mBillingFab.startAnimation(AnimationUtils.loadAnimation(this, R.anim.fab_animation));
     }
 
     @Override
@@ -167,24 +175,14 @@ public class EventsActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     /**
-     * {@link AdapterView.OnItemClickListener} callback method.
-     */
-    @Override
-    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-        Toast.makeText(this, "on item click listener", Toast.LENGTH_SHORT).show();
-        drawer.closeDrawer(GravityCompat.START);
-    }
-
-    /**
      * {@link EventItemCallback} callback method.
      */
     @Override
     public void onEventItemClicked(View view, int tag) {
 
+        mEventViewPager.startAnimation(AnimationUtils.loadAnimation(this, R.anim.page_enter));
         mEventViewPager.setCurrentItem(tag);
         drawer.closeDrawers();
-        Toast.makeText(this, "event item: " + tag, Toast.LENGTH_SHORT).show();
     }
 
     /**
@@ -197,6 +195,7 @@ public class EventsActivity extends AppCompatActivity implements View.OnClickLis
         if (m_eveEventsListAdapter != null) {
             m_eveEventsListAdapter.notifyDataSetChanged();
         }
+        mEventViewPager.startAnimation(AnimationUtils.loadAnimation(this, R.anim.page_enter));
         Toast.makeText(this, "Events Refreshed...", Toast.LENGTH_SHORT).show();
     }
 
