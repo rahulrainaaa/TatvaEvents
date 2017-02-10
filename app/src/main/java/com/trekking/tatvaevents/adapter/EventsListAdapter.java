@@ -67,12 +67,14 @@ public class EventsListAdapter extends ArrayAdapter<Event> {
         ViewHolder viewHolder;
         View view = convertView;
         if (view == null) {
+            // Inflate new View.
             viewHolder = new ViewHolder();
             view = layoutInflater.inflate(layoutResource, null);
             viewHolder.txtEventTitle = (TextView) view.findViewById(R.id.txt_event_title);
             viewHolder.txtEventDate = (TextView) view.findViewById(R.id.txt_event_date);
             view.setTag(viewHolder);
         } else {
+            // Reuse View.
             viewHolder = (ViewHolder) view.getTag();
         }
         m_txtEventTitle = viewHolder.txtEventTitle;
