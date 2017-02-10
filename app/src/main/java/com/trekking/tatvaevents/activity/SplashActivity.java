@@ -10,6 +10,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 
 import com.trekking.tatvaevents.R;
+import com.trekking.tatvaevents.utils.Constants;
 
 /**
  * @class SplashActivity
@@ -35,7 +36,7 @@ public class SplashActivity extends FragmentActivity implements Runnable {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         m_handler = new Handler();
-        Animation animation = AnimationUtils.loadAnimation(this, android.R.anim.slide_in_left);
+        Animation animation = AnimationUtils.loadAnimation(this, R.anim.splash_animation);
         LinearLayout layout = (LinearLayout) findViewById(R.id.activity_splash);
         layout.startAnimation(animation);
     }
@@ -64,6 +65,11 @@ public class SplashActivity extends FragmentActivity implements Runnable {
     @Override
     public void run() {
 
+        if (Constants.eventArrayList.size() < 1) {
+            m_handler.removeCallbacks(this);
+            m_handler.postDelayed(this, 500);
+            return;
+        }
         startActivity(new Intent(this, EventsActivity.class));
         finish();
     }
