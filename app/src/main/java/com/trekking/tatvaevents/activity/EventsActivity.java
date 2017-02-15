@@ -1,8 +1,13 @@
 package com.trekking.tatvaevents.activity;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -33,14 +38,16 @@ import java.util.ArrayList;
  * @class EventsActivity
  * @desc {@link AppCompatActivity} class to handle event activity.
  */
-public class EventsActivity extends AppCompatActivity implements View.OnClickListener, EventItemCallback {
+public class EventsActivity extends AppCompatActivity implements View.OnClickListener, EventItemCallback, SensorEventListener {
 
     /**
      * Global data members.
      */
+    private Sensor mSensor = null;
     private DrawerLayout drawer = null;
     private ListView m_eventListView = null;
     private ViewPager mEventViewPager = null;
+    private SensorManager mSensorManager = null;
     private FloatingActionButton mBillingFab = null;
     private ArrayList<Event> m_eventsArrayList = null;
     private EventsListAdapter m_eveEventsListAdapter = null;
@@ -82,12 +89,21 @@ public class EventsActivity extends AppCompatActivity implements View.OnClickLis
         mEventViewPager.startAnimation(AnimationUtils.loadAnimation(this, R.anim.page_enter));
         Constants.eventsActivity = this;
 
+        mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         mBillingFab.startAnimation(AnimationUtils.loadAnimation(this, R.anim.fab_animation));
+        mSensorManager.registerListener(this, mSensor, SensorManager.SENSOR_DELAY_NORMAL);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mSensorManager.unregisterListener(this);
     }
 
     @Override
@@ -102,13 +118,6 @@ public class EventsActivity extends AppCompatActivity implements View.OnClickLis
 
         closeDrawer();
     }
-
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//
-//        getMenuInflater().inflate(R.menu.events, menu);
-//        return true;
-//    }
 
     /**
      * {@link View.OnClickListener} callback methods.
@@ -186,6 +195,28 @@ public class EventsActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     /**
+     * {@link SensorEventListener} callback method.
+     */
+    @Override
+    public void onSensorChanged(SensorEvent sensorEvent) {
+
+        double valueX = sensorEvent.values[0];
+        if (valueX > 19.0) {
+            int i = mEventViewPager.getCurrentItem();
+            Toast.makeText(this, "" + i, Toast.LENGTH_SHORT).show();//
+            // mEventViewPager.setCurrentItem();
+        }
+        if (valueX < -19.0) {
+            Toast.makeText(this, "right: " + valueX, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int i) {
+
+    }
+
+    /**
      * @method refreshList
      * @desc Method to refresh the data in list. (Callback from Application).
      */
@@ -228,4 +259,5 @@ public class EventsActivity extends AppCompatActivity implements View.OnClickLis
     private void removeCallbacks() {
         Constants.eventsActivity = null;
     }
+
 }
